@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../models/todo.dart';
+import '../services/dbhelper.dart';
+
 class CreateTodoPage extends StatefulWidget {
   const CreateTodoPage({super.key});
   static const routeName = '/create';
@@ -17,7 +20,7 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
     return Scaffold(
       floatingActionButton: _title.isNotEmpty
           ? FloatingActionButton(
-              onPressed: () {},
+              onPressed: _onSubmitted,
               child: const Icon(Icons.save),
             )
           : null,
@@ -50,5 +53,10 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
         ),
       ),
     );
+  }
+
+  void _onSubmitted() {
+    DbHelper.addTodo(Todo(title: _title, description: _description));
+    Navigator.of(context).pop();
   }
 }

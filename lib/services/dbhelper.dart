@@ -13,10 +13,9 @@ class DbHelper {
       schemas: [TodoSchema],
       directory: dir.path,
     );
-    var todos = [
-      Todo(id: nextTodoId, title: 'Get Stuff Done'),
-      Todo(id: nextTodoId, title: 'Some shit'),
-    ];
-    _isar.write((isar) => isar.todos.putAll(todos));
   }
+
+  static List<Todo> fetchTodos() => _isar.todos.where().findAll();
+
+  static void addTodo(Todo todo) => _isar.write((isar) => isar.todos.put(todo));
 }
