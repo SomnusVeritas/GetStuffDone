@@ -13,11 +13,14 @@ class DbHelper {
       schemas: [TodoSchema],
       directory: dir.path,
     );
-    _isar.write((isar) => isar.todos.clear());
+    // _isar.write((isar) => isar.todos.clear());
   }
 
-  static List<Todo> fetchTodos() =>
+  static List<Todo> fetchUndoneTodos() =>
       _isar.todos.where().doneEqualTo(false).sortByCreatedAtDesc().findAll();
+
+  static List<Todo> fetchAllTodos() =>
+      _isar.todos.where().sortByDone().thenByCreatedAt().findAll();
 
   static void addOrUpdateTodo(Todo todo) =>
       _isar.write((isar) => isar.todos.put(todo));
