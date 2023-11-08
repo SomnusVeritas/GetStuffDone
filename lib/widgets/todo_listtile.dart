@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../models/todo.dart';
+import '../pages/todo_detail_page.dart';
+import '../services/todo_provider.dart';
 
 class TodoListTile extends StatelessWidget {
   const TodoListTile({super.key, required this.todo, required this.onPressed});
@@ -20,6 +22,7 @@ class TodoListTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tileColor: Theme.of(context).colorScheme.primaryContainer,
       title: Text(todo.title),
+      onTap: () => _onListTileTapped(context),
       trailing: IconButton(
         onPressed: onPressed,
         icon: Icon(
@@ -35,6 +38,7 @@ class TodoListTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tileColor: Theme.of(context).colorScheme.surfaceVariant,
       title: Text(todo.title),
+      onTap: () => _onListTileTapped(context),
       trailing: IconButton(
         onPressed: onPressed,
         icon: Icon(
@@ -43,5 +47,10 @@ class TodoListTile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _onListTileTapped(BuildContext context) {
+    TodoProvider.selectedTodo = todo;
+    Navigator.of(context).pushNamed(TodoDetailPage.routeName);
   }
 }

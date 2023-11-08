@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'pages/todo_create_page.dart';
 import 'pages/dashboard_page.dart';
+import 'pages/todo_detail_page.dart';
 import 'services/dbhelper.dart';
 
 void main() async {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       routes: {
         DashboardPage.routeName: (context) => const DashboardPage(),
         CreateTodoPage.routeName: (context) => const CreateTodoPage(),
+        TodoDetailPage.routeName: (context) => const TodoDetailPage(),
       },
     );
   }
