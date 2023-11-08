@@ -39,11 +39,29 @@ class _TodoListState extends State<TodoList> {
       tileColor: Theme.of(context).colorScheme.primaryContainer,
       title: Text(todo.title),
       trailing: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          todo.done = true;
+          DbHelper.addOrUpdateTodo(todo);
+          _showSnackbar(todo);
+        },
         icon: Icon(
           Icons.check_box,
           color: Theme.of(context).colorScheme.primary,
         ),
+      ),
+    );
+  }
+
+  void _showSnackbar(Todo todo) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Todo done'),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              todo.done = false;
+              DbHelper.addOrUpdateTodo(todo);
+            }),
       ),
     );
   }

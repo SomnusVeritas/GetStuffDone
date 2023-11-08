@@ -56,7 +56,12 @@ class _CreateTodoPageState extends State<CreateTodoPage> {
   }
 
   void _onSubmitted() {
-    DbHelper.addOrUpdateTodo(Todo(title: _title, description: _description));
+    DbHelper.addOrUpdateTodo(Todo(
+      id: DbHelper.nextTodoId,
+      title: _title,
+      description: _description,
+      createdAt: DateTime.now(),
+    ));
     Navigator.of(context).pop();
   }
 }

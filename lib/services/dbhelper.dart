@@ -17,7 +17,7 @@ class DbHelper {
   }
 
   static List<Todo> fetchTodos() =>
-      _isar.todos.where().doneEqualTo(false).findAll();
+      _isar.todos.where().doneEqualTo(false).sortByCreatedAtDesc().findAll();
 
   static void addOrUpdateTodo(Todo todo) =>
       _isar.write((isar) => isar.todos.put(todo));

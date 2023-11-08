@@ -1,7 +1,5 @@
 import 'package:isar/isar.dart';
 
-import '../services/dbhelper.dart';
-
 part 'todo.g.dart';
 
 @collection
@@ -13,11 +11,10 @@ class Todo {
   bool done;
 
   Todo({
-    int? index,
+    required this.id,
     required this.title,
+    required this.createdAt,
     this.description = '',
-    DateTime? createdTime,
     this.done = false,
-  })  : createdAt = createdTime ?? DateTime.now(),
-        id = index ?? DbHelper.nextTodoId;
+  });
 }
