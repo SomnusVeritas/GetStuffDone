@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'pages/dashboard_page.dart';
+import 'services/dbhelper.dart';
 
-void main() {
+void main() async {
+  await DbHelper.init();
   runApp(const MyApp());
 }
 
