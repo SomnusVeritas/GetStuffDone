@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../models/todo.dart';
 import '../services/dbhelper.dart';
 
 class TodoList extends StatefulWidget {
@@ -10,7 +11,17 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  final _todos = DbHelper.fetchTodos();
+  List<Todo> _todos = DbHelper.fetchTodos();
+
+  @override
+  void initState() {
+    super.initState();
+    DbHelper.watchTodos().listen((event) {
+      setState(() {
+        _todos = DbHelper.fetchTodos();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

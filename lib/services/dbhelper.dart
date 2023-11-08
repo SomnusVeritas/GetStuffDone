@@ -18,4 +18,7 @@ class DbHelper {
   static List<Todo> fetchTodos() => _isar.todos.where().findAll();
 
   static void addTodo(Todo todo) => _isar.write((isar) => isar.todos.put(todo));
+
+  static Stream<void> watchTodos() =>
+      _isar.todos.watchLazy(fireImmediately: true);
 }
