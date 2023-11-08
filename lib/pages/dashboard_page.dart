@@ -10,12 +10,18 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () =>
             Navigator.of(context).pushNamed(CreateTodoPage.routeName),
         child: const Icon(Icons.add),
       ),
-      body: const TodoList(),
+      body: Center(
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width * 0.9,
+          child: const TodoList(),
+        ),
+      ),
     );
   }
 }

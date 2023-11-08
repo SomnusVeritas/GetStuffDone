@@ -16,7 +16,7 @@ class _TodoListState extends State<TodoList> {
   @override
   void initState() {
     super.initState();
-    DbHelper.watchTodos().listen((event) {
+    DbHelper.todosChangedStream.listen((event) {
       setState(() {
         _todos = DbHelper.fetchTodos();
       });
@@ -35,7 +35,16 @@ class _TodoListState extends State<TodoList> {
   Widget _listBuilder(BuildContext context, int index) {
     final todo = _todos.elementAt(index);
     return ListTile(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      tileColor: Theme.of(context).colorScheme.primaryContainer,
       title: Text(todo.title),
+      trailing: IconButton(
+        onPressed: () {},
+        icon: Icon(
+          Icons.check_box,
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ),
     );
   }
 }

@@ -7,15 +7,17 @@ part 'todo.g.dart';
 @collection
 class Todo {
   final int id;
-  final String title;
-  final String description;
+  String title;
+  String description;
   final DateTime createdAt;
+  bool done;
 
   Todo({
-    int? id,
+    int? index,
     required this.title,
     this.description = '',
-    DateTime? createdAt,
-  })  : createdAt = createdAt ?? DateTime.now(),
-        id = id ?? DbHelper.nextTodoId;
+    DateTime? createdTime,
+    this.done = false,
+  })  : createdAt = createdTime ?? DateTime.now(),
+        id = index ?? DbHelper.nextTodoId;
 }

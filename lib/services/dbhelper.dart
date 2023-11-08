@@ -13,12 +13,21 @@ class DbHelper {
       schemas: [TodoSchema],
       directory: dir.path,
     );
+    _isar.write((isar) => isar.todos.clear());
   }
 
-  static List<Todo> fetchTodos() => _isar.todos.where().findAll();
+  static List<Todo> fetchTodos() =>
+      _isar.todos.where().doneEqualTo(false).findAll();
 
-  static void addTodo(Todo todo) => _isar.write((isar) => isar.todos.put(todo));
+  static void addOrUpdateTodo(Todo todo) =>
+      _isar.write((isar) => isar.todos.put(todo));
 
-  static Stream<void> watchTodos() =>
+  static void deleteTodoAt(int index) =>
+      _isar.write((isar) => isar.todos.delete(index));
+
+  static void deleteTodo(Todo todo) =>
+      _isar.write((isar) => isar.todos.delete(todo.id));
+
+  static Stream<void> get todosChangedStream =>
       _isar.todos.watchLazy(fireImmediately: true);
 }
