@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'pages/create_todo_page.dart';
 import 'pages/dashboard_page.dart';
 import 'services/dbhelper.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         DashboardPage.routeName: (context) => const DashboardPage(),
+        CreateTodoPage.routeName: (context) => const CreateTodoPage(),
       },
     );
   }
