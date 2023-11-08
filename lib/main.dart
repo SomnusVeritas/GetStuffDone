@@ -4,6 +4,7 @@ import 'pages/dashboard_page.dart';
 import 'services/dbhelper.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await DbHelper.init();
   runApp(const MyApp());
 }

@@ -5,6 +5,7 @@ import '../models/todo.dart';
 
 class DbHelper {
   static late Isar _isar;
+  static int get nextTodoId => _isar.todos.autoIncrement();
 
   static init() async {
     final dir = await getApplicationDocumentsDirectory();
@@ -12,5 +13,10 @@ class DbHelper {
       schemas: [TodoSchema],
       directory: dir.path,
     );
+    var todos = [
+      Todo(id: nextTodoId, title: 'Get Stuff Done'),
+      Todo(id: nextTodoId, title: 'Some shit'),
+    ];
+    _isar.write((isar) => isar.todos.putAll(todos));
   }
 }
