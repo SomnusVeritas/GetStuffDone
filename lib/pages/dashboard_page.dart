@@ -15,12 +15,20 @@ class _DashboardPageState extends State<DashboardPage> {
   bool _showDoneTodos = false;
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-            onPressed: () => setState(() => _showDoneTodos = !_showDoneTodos),
-            icon: const Icon(Icons.visibility),
+          Padding(
+            padding: EdgeInsets.only(right: screenWidth * 0.05),
+            child: IconButton(
+              padding: EdgeInsets.zero,
+              visualDensity: VisualDensity.compact,
+              onPressed: () => setState(() => _showDoneTodos = !_showDoneTodos),
+              icon: _showDoneTodos
+                  ? const Icon(Icons.visibility)
+                  : const Icon(Icons.visibility_off),
+            ),
           )
         ],
       ),
@@ -31,7 +39,7 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
       body: Center(
         child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.9,
+          width: screenWidth * 0.9,
           child: TodoList(showDoneTodos: _showDoneTodos),
         ),
       ),
