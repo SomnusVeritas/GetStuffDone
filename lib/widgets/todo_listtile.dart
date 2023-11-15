@@ -11,17 +11,45 @@ class TodoListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!todo.done) {
-      return undoneTodo(context);
-    }
-    return doneTodo(context);
+    final tileColor = todo.done
+        ? Theme.of(context).colorScheme.surfaceVariant
+        : Theme.of(context).colorScheme.primaryContainer;
+    final icon = todo.done
+        ? Icon(
+            Icons.delete,
+            color: Theme.of(context).colorScheme.error,
+          )
+        : Icon(
+            Icons.check_box,
+            color: Theme.of(context).colorScheme.primary,
+          );
+    return ListTile(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      tileColor: tileColor,
+      contentPadding: const EdgeInsets.only(left: 24, right: 12),
+      title: Text(
+        todo.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
+      onTap: () => _onListTileTapped(context),
+      trailing: IconButton(
+        onPressed: onPressed,
+        icon: icon,
+      ),
+    );
   }
 
   Widget undoneTodo(BuildContext context) {
     return ListTile(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tileColor: Theme.of(context).colorScheme.primaryContainer,
-      title: Text(todo.title),
+      contentPadding: const EdgeInsets.only(left: 24, right: 12),
+      title: Text(
+        todo.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
       onTap: () => _onListTileTapped(context),
       trailing: IconButton(
         onPressed: onPressed,
@@ -37,7 +65,11 @@ class TodoListTile extends StatelessWidget {
     return ListTile(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       tileColor: Theme.of(context).colorScheme.surfaceVariant,
-      title: Text(todo.title),
+      title: Text(
+        todo.title,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+      ),
       onTap: () => _onListTileTapped(context),
       trailing: IconButton(
         onPressed: onPressed,
